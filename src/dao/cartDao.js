@@ -59,12 +59,13 @@ class CartDao {
       return false; // Error: Carrito no encontrado
     }
 
-    const index = cart.products.findIndex((item) => item.product.id === productId);
+    const index = cart.products.findIndex((item) => item.productId === productId);
 
     if (index !== -1) {
       // Elimina el producto del carrito
       cart.products.splice(index, 1);
-      this.saveCarts();
+      await cart.save();
+      // this.saveCarts();
       return true;
     }
 

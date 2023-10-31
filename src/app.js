@@ -14,15 +14,19 @@ import Product from "./dao/models/productModel.js"
 import __dirname from './utils.js';
 import mongoose from "mongoose";
 
-
 const app = express();
 const port = 8080;
 const server = http.createServer(app); //servidor HTTP
 
 const mongoUrl= 'mongodb+srv://villegasmaxi:lola2508@cluster0.znvh4p2.mongodb.net/?retryWrites=true&w=majority'//mongoDB-connected Atlas
+//MongoDB
 mongoose.connect(mongoUrl, {dbName: 'ecommerce'})
 .then(()=>{
   console.log('DB mongo connected')
+  //server
+  server.listen(port, () => {
+    console.log(`Servidor arriba en puerto ${port}`);
+  });
 })
 .catch(e =>{
   console.error('error connecting to DB mongo')
@@ -116,7 +120,5 @@ app.use(bodyParser.json());
 
 app.use("/api", router);
 
-server.listen(port, () => {
-  console.log(`Servidor arriba en puerto ${port}`);
-});
+
 server;
