@@ -6,7 +6,7 @@
 <body>
     <div class="container">
 <h2>Lista de Productos home</h2>
-    <ul>
+    <ul id="product-list" class="m-1 border border-danger">
         {{#each products}}
             <li>{{this.title}} - {{this.price}}</li>
         {{/each}}

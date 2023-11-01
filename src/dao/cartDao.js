@@ -48,9 +48,8 @@ class CartDao {
     }
   }
 
-  // faltan otros métodos, como eliminar productos del carrito, actualizar carrito, etc.
   //probando borrar producto de carrito
-   //eliminar productos de un carrito. (todavis no lo usamos)
+   //eliminar productos de un carrito.
 
   async removeProductFromCart(cartId, productId) {
     const cart = await this.getCartById(cartId); //this. adelante de getcart

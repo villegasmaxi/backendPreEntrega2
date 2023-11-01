@@ -32,41 +32,29 @@ mongoose.connect(mongoUrl, {dbName: 'ecommerce'})
   console.error('error connecting to DB mongo')
 })
 
-//prueba de ruta 
-// app.get("/mongo", (req, res) => {
-//   res.json({status:"OK"});
-// });
+
 
 const io = new SocketIoServer(server);//websockets 
+
 io.on("connection", (socket) => {
-  console.log(" IO cliente conectado", socket.id );
-  
+  console.log(" IO cliente conectado");
+  console.log(" ID socket Server", socket.id );
+  console.log(" ID Socket cliente", socket.client.id);
     // Consulta los productos desde la base de datos y emite la lista actualizada
 
-//consulta a mongo no funciona
-
-  socket.on("updateProducts", () => {
-    Product.find({}, (err, products) => {
-      if (err) {
-        console.error(err);
-      } else {
-        socket.emit("productsUpdated", products);
-      }
-    });
+  socket.on("updateProducts", async () => {
+    console.log('Estoy en updateProducts back');
+    const products = await ProductDao.getProducts();
+    //console.log('products', products);
+    socket.emit("productsUpdated", products); // Emite la lista de productos actualizada 
   });
-
-  // consulta al json local si funciona
-
-  // socket.on("updateProducts", () => {
-  //   const products = productManager.getProducts();
-  //   socket.emit("productsUpdated", products); // Emite la lista de productos actualizada 
-  // });
 
 
   socket.on("holaWebsocket", () => {
     console.log("hola desde server");
     socket.emit("holaConsola", { message: "hola desde server para el front" });
   });
+
 });
 
 //app.use(express.static( process.cwd() + "/public"));
@@ -110,9 +98,9 @@ app.get("/realtimeproducts", (req, res) => {
 });
 
 //ruta para el chat
-app.get("/chat", (req, res) => {
-  res.render("chat");
-});
+// app.get("/chat", (req, res) => {
+//   res.render("chat");
+// });
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

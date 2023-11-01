@@ -1,13 +1,15 @@
 const socket = io();
 
-
-
 socket.emit('holaWebsocket')
 
 socket.on('holaConsola',(payload)=>{
     console.log('hola desde front');
     console.log(`mensaje desde el server ${payload.message}`);
+    socket.emit('updateProducts')
+    
 })
+
+
 
 // Escucha eventos de WebSocket
 socket.on('productsUpdated', (products) => {
@@ -20,6 +22,8 @@ socket.on('productsUpdated', (products) => {
         productList.appendChild(listItem);
     });
 });
+
+
 
 // crear un nuevo producto
 const addProductForm = document.querySelector('#add-product-form');
