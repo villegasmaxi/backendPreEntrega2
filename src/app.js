@@ -6,13 +6,12 @@ import { Server as SocketIoServer } from "socket.io"; // Importa Server con alia
 
 import router from "./router/routes.js";
 import bodyParser from "body-parser";
-
 import ProductDao from "./dao/productDao.js";
-
-import Product from "./dao/models/productModel.js"
 
 import __dirname from './utils.js';
 import mongoose from "mongoose";
+
+
 
 const app = express();
 const port = 8080;
@@ -49,7 +48,6 @@ io.on("connection", (socket) => {
     socket.emit("productsUpdated", products); // Emite la lista de productos actualizada 
   });
 
-
   socket.on("holaWebsocket", () => {
     console.log("hola desde server");
     socket.emit("holaConsola", { message: "hola desde server para el front" });
@@ -63,11 +61,6 @@ app.use(express.static( __dirname + "/public"));
 
 
 //Define una variable global para compartir datos con las vistas
-
-// app.use((req, res, next) => {
-//   res.locals.products = productManager.getProducts();
-//   next();
-// });
 
 //variable global a la bd mongoAtlas
 
@@ -83,9 +76,6 @@ app.set("views", process.cwd() + "/views");
 //app.set("views", __dirname + "/views");
 app.set("view engine", "handlebars");
 
-app.get("/index",(req,res)=>{
-  res.render("index")
-})
 
 // Ruta para la vista home
 app.get("/", (req, res) => {
@@ -97,10 +87,7 @@ app.get("/realtimeproducts", (req, res) => {
   res.render("realTimeProducts");
 });
 
-//ruta para el chat
-// app.get("/chat", (req, res) => {
-//   res.render("chat");
-// });
+
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

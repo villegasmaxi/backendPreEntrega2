@@ -6,6 +6,7 @@ socket.on('holaConsola',(payload)=>{
     console.log('hola desde front');
     console.log(`mensaje desde el server ${payload.message}`);
     socket.emit('updateProducts')
+    socket.emit('updateCarts')
     
 })
 
@@ -22,7 +23,6 @@ socket.on('productsUpdated', (products) => {
         productList.appendChild(listItem);
     });
 });
-
 
 
 // crear un nuevo producto

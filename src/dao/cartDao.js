@@ -12,7 +12,7 @@ class CartDao {
       throw new Error('Error al crear el carrito');
     }
   }
-
+ 
   async getCartById(cartId) {
     try {
       const cart = await Cart.findById(cartId);
@@ -52,7 +52,7 @@ class CartDao {
    //eliminar productos de un carrito.
 
   async removeProductFromCart(cartId, productId) {
-    const cart = await this.getCartById(cartId); //this. adelante de getcart
+    const cart = await this.getCartById(cartId);
 
     if (!cart) {
       return false; // Error: Carrito no encontrado
