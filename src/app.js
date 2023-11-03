@@ -87,6 +87,13 @@ app.get("/realtimeproducts", (req, res) => {
   res.render("realTimeProducts");
 });
 
+app.get("/cartDetail", (req, res) => {
+  res.render("cartDetail");
+});
+
+app.get("/productDetail", (req, res) => {
+  res.render("productDetail");
+});
 
 
 app.use(express.json());

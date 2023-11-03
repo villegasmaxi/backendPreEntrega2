@@ -5,6 +5,7 @@ import Cart from "../dao/models/cartModel.js"
 const routerCartMongo = express.Router();
 const cartDao = new CartDao(); // Crear una instancia de CartDao
 
+
 // Crear un nuevo carrito
 routerCartMongo.post('/', async (req, res) => {
   const { userId } = req.body;
@@ -79,6 +80,34 @@ routerCartMongo.put('/:cid/productsMongo/:pid', async (req, res) => {
     res.status(500).json({ error: 'Error al actualizar la cantidad de producto en el carrito' });
   }
 });
+
+// Eliminar un producto del carrito
+routerCartMongo.delete('/:cid/products/:pid', async (req, res) => {
+  const { cid, pid } = req.params;
+  try {
+    const cart = await Cart.findById(cid);
+    if (!cart) {
+      res.status(404).json({ error: 'Carrito no encontrado' });
+      return;
+    }
+
+    const index = cart.products.findIndex((item) => item.productId == pid);
+
+    if (index !== -1) {
+      cart.products.splice(index, 1);
+      await cart.save();
+      res.json({ message: 'Producto eliminado del carrito con éxito' });
+    } else {
+      res.status(404).json({ error: 'Producto no encontrado en el carrito' });
+    }
+  } catch (error) {
+    res.status(500).json({ error: 'Error al eliminar el producto del carrito' });
+  }
+});
+
+
+
+
 
 //elimina un producto de un carrito 
 routerCartMongo.delete('/:cid/productsMongo/:pid', async (req, res) => {
