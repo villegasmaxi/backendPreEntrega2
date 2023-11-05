@@ -8,8 +8,8 @@ const productSchema = new mongoose.Schema({
   price: { type: Number, required: true },
   code: { type: Number, required: true, unique: true }, // Asegura que el código sea único
   status: { type: Boolean, default: true },
-  stock: { type: Number, required: true },
-  category: { type: String, required: true },
+  stock: { type: Number, required: false },
+  category: { type: String, required: false },
   thumbnail: { type: [String] }, // Un array de strings para las miniaturas
 });
 

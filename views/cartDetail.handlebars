@@ -6,11 +6,13 @@
 <body>
     <h2>Detalle del Carrito</h2>
     <div class="cart-details">
-        <h3>Carrito ID: {{cart._id}}</h3>
+        <h3>Carrito ID: {{this.cart._id}}</h3>
         <ul>
-            {{#each cart.products}}
-                <li>{{this.productId.title}} - Cantidad: {{this.quantity}}</li>
-            {{/each}}
+            {{#each this.cart.products}}
+    <li>{{productId.title}} - Cantidad: {{quantity}}</li>
+{{/each}}
+
+            
         </ul>
     </div>
 </body>

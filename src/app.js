@@ -1,4 +1,5 @@
 // app.js
+
 import express from "express";
 import handlebars from "express-handlebars";
 import http from "http";
@@ -52,6 +53,11 @@ io.on("connection", (socket) => {
     console.log("hola desde server");
     socket.emit("holaConsola", { message: "hola desde server para el front" });
   });
+
+  socket.on('createProduct', async(newProductData)=>{
+    const productData = await ProductDao.addProduct(newProductData);
+    console.log(productData);
+  })
 
 });
 
