@@ -16,8 +16,32 @@ routerCartMongo.post('/', async (req, res) => {
     res.status(500).json({ error: 'Error al crear el carrito' });
   }
 });
+//traer un carrito por id
+// routerCartMongo.get('/:cid', async (req, res) => {
+//   const { cid } = req.params;
+//   try {
+//     const cart = await Cart.findById(cid).populate({
+//       path: 'products.productId',
+//       model: 'Product', // Reemplaza 'Product' con el nombre de tu modelo de producto
+//     });
 
-// Traer un carrito por ID
+//     if (cart) {
+//       // Itera a través de los productos poblados en el carrito
+//       const populatedProducts = cart.products.map((product) => {
+//         // Aquí puedes acceder a los detalles poblados de cada producto
+//         return product.productId;
+//       });
+
+//       res.json(populatedProducts);
+//     } else {
+//       res.status(404).json({ error: 'Carrito no encontrado' });
+//     }
+//   } catch (error) {
+//     res.status(500).json({ error: 'Error al obtener el carrito' });
+//   }
+// });
+
+//Traer un carrito por ID
 routerCartMongo.get('/:cid', async (req, res) => {
   const { cid } = req.params;
   try {

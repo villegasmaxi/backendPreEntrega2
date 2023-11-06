@@ -7,7 +7,6 @@ const router = Router();
 
 router.use('/cartsMongo', cartsMongo);
 router.use('/productsMongo', productsMongo);
-//router.use('/handlebars', Handlebars)
 router.use('/', (req, res) => {
     res.status(404).json({
       message: 'invalid api endpoint'

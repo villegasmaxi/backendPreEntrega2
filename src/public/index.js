@@ -39,7 +39,6 @@ document.addEventListener('DOMContentLoaded', () => {
     
         // Envía los datos al servidor a través de WebSocket
         socket.emit('createProduct', newProductData);
-        console.log(newProductData);
         addProductForm.reset(); // Limpia el formulario
     });
     });

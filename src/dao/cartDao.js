@@ -70,6 +70,7 @@ class CartDao {
 
     return false; // Error: Producto no encontrado en el carrito
   }
+
 }
 
 export default CartDao;

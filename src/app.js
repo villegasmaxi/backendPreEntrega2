@@ -3,7 +3,7 @@
 import express from "express";
 import handlebars from "express-handlebars";
 import http from "http";
-import { Server as SocketIoServer } from "socket.io"; // Importa Server con alias
+import { Server as SocketIoServer } from "socket.io"; // Importo Server con alias
 
 import router from "./router/routes.js";
 import bodyParser from "body-parser";
@@ -12,7 +12,7 @@ import ProductDao from "./dao/productDao.js";
 import __dirname from './utils.js';
 import mongoose from "mongoose";
 
-
+import Cart from "./dao/models/cartModel.js"
 
 const app = express();
 const port = 8080;
@@ -93,9 +93,24 @@ app.get("/realtimeproducts", (req, res) => {
   res.render("realTimeProducts");
 });
 
-app.get("/cartDetail", (req, res) => {
-  res.render("cartDetail");
+app.get("/cartDetail", async (req, res) => {
+  try {
+    const allCarts = await Cart.find().lean().exec();
+    res.render("cartDetail", { carts: allCarts });
+  } catch (error) {
+    console.error(error);
+    // Manejo de errores
+    res.status(500).send("Error al recuperar los carritos.");
+  }
 });
+
+
+
+
+// app.get("/cartDetail", async (req, res) => {
+//   const cartDetail = await Cart.find().lean().exec()
+//   res.render("cartDetail", {cartDetail});
+// });
 
 app.get("/productDetail", (req, res) => {
   res.render("productDetail");
