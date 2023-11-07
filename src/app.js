@@ -78,8 +78,8 @@ app.use((req, res, next) => {
 
 //config handlebars
 app.engine("handlebars", handlebars.engine());
-app.set("views", process.cwd() + "/views");
-//app.set("views", __dirname + "/views");
+//app.set("views", process.cwd() + "/views");
+app.set("views", __dirname + "/views");
 app.set("view engine", "handlebars");
 
 
@@ -96,10 +96,10 @@ app.get("/realtimeproducts", (req, res) => {
 app.get("/cartDetail", async (req, res) => {
   try {
     const allCarts = await Cart.find().lean().exec();
+    console.log(allCarts)
     res.render("cartDetail", { carts: allCarts });
   } catch (error) {
     console.error(error);
-    // Manejo de errores
     res.status(500).send("Error al recuperar los carritos.");
   }
 });

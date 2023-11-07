@@ -9,12 +9,15 @@
         <h3>Carrito ID: {{_id}}</h3>
         <ul>
             {{#each products}}
-    <li>{{this.productId.title}} - Cantidad: {{quantity}}</li>
+            {{#each this}}
+    <li>{{this.productId.title}} - Cantidad: {{this.quantity}}</li>
+{{/each}}
 {{/each}}
 
             
         </ul>
     </div>
+  
 </body>
 </html>
 
