@@ -84,25 +84,25 @@ app.set("view engine", "handlebars");
 
 
 // Ruta para la vista home
-app.get("/", (req, res) => {
-  res.render("home");
-});
+// app.get("/", (req, res) => {
+//   res.render("home");
+// });
 
-// Ruta para la vista en tiempo real
-app.get("/realtimeproducts", (req, res) => {
-  res.render("realTimeProducts");
-});
+// // Ruta para la vista en tiempo real
+// app.get("/realtimeproducts", (req, res) => {
+//   res.render("realTimeProducts");
+// });
 
-app.get("/cartDetail", async (req, res) => {
-  try {
-    const allCarts = await Cart.find().lean().exec();
-    console.log(allCarts)
-    res.render("cartDetail", { carts: allCarts });
-  } catch (error) {
-    console.error(error);
-    res.status(500).send("Error al recuperar los carritos.");
-  }
-});
+// app.get("/cartDetail", async (req, res) => {
+//   try {
+//     const allCarts = await Cart.find().lean().exec();
+//     console.log(allCarts)
+//     res.render("cartDetail", { carts: allCarts });
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).send("Error al recuperar los carritos.");
+//   }
+// });
 
 
 
@@ -112,16 +112,16 @@ app.get("/cartDetail", async (req, res) => {
 //   res.render("cartDetail", {cartDetail});
 // });
 
-app.get("/productDetail", (req, res) => {
-  res.render("productDetail");
-});
+// app.get("/productDetail", (req, res) => {
+//   res.render("productDetail");
+// });
 
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
 app.use(bodyParser.json());
 
 app.use("/api", router);
-
 
 server;
