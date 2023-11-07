@@ -79,7 +79,7 @@ app.use((req, res, next) => {
 //config handlebars
 app.engine("handlebars", handlebars.engine());
 //app.set("views", process.cwd() + "/views");
-app.set("views", __dirname + "/views");
+app.set('views', __dirname + '/views');
 app.set("view engine", "handlebars");
 
 
